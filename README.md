@@ -9,23 +9,8 @@
 使用pip命令安装即可
 ```
 ## 用法:
-```
-with open(r'C:\Users\sws123\Desktop\txt\demo.txt', 'r') as f:   # 输入收集的url文件路径
-    for line in f.readlines():
-        lines.append(line.strip() + '\n')
-        reset.add(line.strip() + '\n')
-count = len(lines) - len(reset)
-quchong = open(r'C:\Users\sws123\Desktop\demo.txt', 'w+')
-quchong.writelines(reset)
-quchong.close()
-```
-总共生成5个txt文件,这里要分别输入这五个文件的存放路径
-```
-if len(a_list):                        # 分别输入五个文件的存放路径
-    normal = open(r'C:\Users\sws123\Desktop\a.txt', 'w+', encoding='utf-8')
-    normal.writelines(a_list)
-    normal.close()
-```
+>Usage: urls-judge.py [options] -i input
+>-h, --help            show this help message and exit
 
 ## 屏幕截图:
 ![result.png](https://upload-images.jianshu.io/upload_images/21474770-1f2b9362c911a432.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

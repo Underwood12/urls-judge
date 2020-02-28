@@ -16,7 +16,7 @@
 ```
 ## 用法:
 >Usage: urls-judge.py [options] -i input  
-Options:
+Options:  
 -h,　--help　　　　　　　show program's version number and exit  
 -o,　--output　　　　　　The dirname where the files are located  
 -i,　--input　　　　　　　The path to the file that holds the url or IP

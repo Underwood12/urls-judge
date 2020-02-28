@@ -4,6 +4,8 @@ import aiohttp
 import time
 import re
 import difflib
+import argparse
+import os
 from bs4 import BeautifulSoup
 
 start = time.time()
@@ -86,7 +88,7 @@ async def get(url, sem):
                         else:
                             other_list.add('500\t' + url2 + "\t%d\t%s\n" % (status2, title))
                     elif status == 403:
-                        if status2 in [200, 304,404, 403, 400]:
+                        if status2 in [200, 304, 404, 403, 400]:
                             c_list.add(url2 + "\t%d\t%s\n" % (status2, title))
                         else:
                             other_list.add('403\t' + url2 + "\t%d\t%s\n" % (status2, title))
@@ -143,7 +145,7 @@ async def get(url, sem):
                         if status2 == 403:
                             c_list.add(url2 + "\t%d\t%s\n" % (status2, title))
                         elif status2 in [301, 302, 303, 304, 307]:
-                            async with session.get(url=url2,  verify_ssl=False, timeout=15) as resp3:
+                            async with session.get(url=url2, verify_ssl=False, timeout=15) as resp3:
                                 status3 = resp3.status
                                 text3 = await resp3.text(errors='ignore')
                                 soup2 = BeautifulSoup(text3, 'html.parser')
@@ -166,7 +168,7 @@ async def get(url, sem):
                         elif status2 == 200:
                             a_list.add(url2 + "\t%d\t%s\n" % (status2, title))
                         else:
-                            other_list.add('3XX\t' + url2 + "\t%d\t%s\n" % (status2, title))
+                            other_list.add( '3XX\t' + url2 + "\t%d\t%s\n" % (status2, title))
                     elif status in [401]:
                         a_list.add(url2 + "\t%d\t%s\n" % (status2, title))
                     elif status in [405]:
@@ -185,57 +187,77 @@ async def get(url, sem):
             elif str_e.find('远程计算机拒绝网络连接') + 1:
                 e_list.add(url.strip('/booksiyi/') + '\t远程计算机拒绝网络连接\n')
             else:
-                e_list.add(url.strip('/booksiyi/')+'\t'+"ClientConnectorError:"+str_e+'\n')
+                e_list.add( url.strip('/booksiyi/') + '\t' + "ClientConnectorError:" + str_e + '\n')
         except aiohttp.client.ClientOSError as e:
-            print(url+"\tClientOSError:", e)
+            print(url + "\tClientOSError:", e)
             str_e = str(e)
-            e_list.add(url.strip('/booksiyi/')+'\t'+"ClientOSError:"+str_e+'\n')
+            e_list.add(url.strip('/booksiyi/') + '\t' + "ClientOSError:" + str_e + '\n')
         except aiohttp.client.ClientConnectionError as e:
-            print(url+"\tClientConnectionError:", e)
+            print(url + "\tClientConnectionError:", e)
             str_e = str(e)
-            e_list.add(url.strip('/booksiyi/')+'\t'+"ClientConnectionError:"+str_e+'\n')
+            e_list.add(url.strip('/booksiyi/') + '\t' + "ClientConnectionError:" + str_e + '\n')
         except aiohttp.client.ClientResponseError as e:
-            print(url+"\tClientResponseError", e)
+            print(url + "\tClientResponseError", e)
             str_e = str(e)
-            e_list.add(url.strip('/booksiyi/')+'\t'+"ClientResponseError:"+str_e+'\n')
+            e_list.add(url.strip('/booksiyi/') + '\t' + "ClientResponseError:" + str_e + '\n')
         except aiohttp.client.ClientError as e:
-            print(url+"\tClientError", e)
+            print(url + "\tClientError", e)
             str_e = str(e)
-            e_list.add(url.strip('/booksiyi/')+'\t'+"ClientError:"+str_e+'\n')
-        if len(c_list):
-            error_lists = open(r'C:\Users\sws123\Desktop\python_test\test3\c.txt', 'w+', encoding='utf-8')
-            error_lists.writelines(c_list)
-            error_lists.close()
-        if len(e_list):
-            exception_lists = open(r'C:\Users\sws123\Desktop\python_test\test3\e.txt', 'w+', encoding='utf-8')
-            exception_lists.writelines(e_list)
-            exception_lists.close()
+            e_list.add(url.strip('/booksiyi/') + '\t' + "ClientError:" + str_e + '\n')
         if len(a_list):
-            normal = open(r'C:\Users\sws123\Desktop\python_test\test3\a.txt', 'w+', encoding='utf-8')
-            normal.writelines(a_list)
-            normal.close()
+            f1 = open(path1, 'w+', encoding='utf-8')
+            f1.writelines(a_list)
+            f1.close()
         if len(b_list):
-            root_abnormal = open( r'C:\Users\sws123\Desktop\python_test\test3\b.txt', 'w+', encoding='utf-8')
-            root_abnormal.writelines(b_list)
-            root_abnormal.close()
-        if len(other_list):
-            other = open(r'C:\Users\sws123\Desktop\python_test\test3\other.txt', 'w+', encoding='utf-8')
-            other.writelines(other_list)
-            other.close()
+            f2 = open(path2, 'w+', encoding='utf-8')
+            f2.writelines(b_list)
+            f2.close()
+        if len(c_list):
+            fc = open(path3, 'w+', encoding='utf-8')
+            fc.writelines(c_list)
+            fc.close()
         if len(d_list):
-            root_500 = open(r'C:\Users\sws123\Desktop\python_test\test3\d.txt', 'w+', encoding='utf-8')
-            root_500.writelines(d_list)
-            root_500.close()
+            fd = open(path4, 'w+', encoding='utf-8')
+            fd.writelines(d_list)
+            fd.close()
+        if len(e_list):
+            fe = open(path5, 'w+', encoding='utf-8')
+            fe.writelines(e_list)
+            fe.close()
+        if len(other_list):
+            f6 = open(path6, 'w+', encoding='utf-8')
+            f6.writelines(other_list)
+            f6.close()
+        
 
-with open(r'C:\Users\sws123\Desktop\txt\demo.txt', 'r') as f:   # 输入收集的url文件路径
+parser = argparse.ArgumentParser(description='test2.py')
+parser.add_argument('-o', '--output', help='The dirname where the files are located', dest='output', required=False)
+parser.add_argument('-i', '--input', help='The path to the file that holds the url or IP', dest='input', required=True)
+args = parser.parse_args()
+location = args.input
+name = args.output
+if name:
+    if not os.path.exists(name):		# 如果路径 path 存在，返回 True；如果路径 path 不存在，返回 False。
+        os.mkdir(name)					# 创建目录
+        print("创建目录:", name)
+    else:
+        print("该目录已存在，请更换目录名")
+if os.path.exists(name):
+    path1 = os.path.join(name, 'a.txt')
+    path2 = os.path.join(name, 'b.txt')
+    path3 = os.path.join(name, 'c.txt')
+    path4 = os.path.join(name, 'd.txt')
+    path5 = os.path.join(name, 'e.txt')
+    path6 = os.path.join(name, 'other.txt')
+with open(location, 'r') as f:  # 输入收集的url文件路径
     for line in f.readlines():
         lines.append(line.strip() + '\n')
         reset.add(line.strip() + '\n')
 count = len(lines) - len(reset)
-quchong = open(r'C:\Users\sws123\Desktop\txt\demo.txt', 'w+')
+quchong = open(location, 'w+')
 quchong.writelines(reset)
 quchong.close()
-with open(r'C:\Users\sws123\Desktop\txt\demo.txt', 'r') as fr:
+with open(location, 'r') as fr:
     for line in fr.readlines():
         line_h = 'http://' + line.strip() + '/booksiyi/'
         line_hs = 'https://' + line.strip() + '/booksiyi/'

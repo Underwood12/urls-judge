@@ -11,11 +11,12 @@
 ## 依存关系:
 ```
 运行环境: python3.8
-所需依赖库: lxml,asyncio,aiohttp,difflib
+所需依赖库: lxml,asyncio,aiohttp,difflib,argparse
 使用pip命令安装即可
 ```
 ## 用法:
 >Usage: urls-judge.py [options] -i input  
+Options:
 -h,　--help　　　　　　　show program's version number and exit  
 -o,　--output　　　　　　The dirname where the files are located  
 -i,　--input　　　　　　　The path to the file that holds the url or IP

@@ -2,8 +2,8 @@
 
 本脚本用于批量筛选出布置了相应厂商业务或者说正常存活符合正常逻辑的站点，通过异步协程高并发实现快速判断。各位师傅可通过我的博客 [关于判断网站是否正常存活的一些想法](https://www.jianshu.com/p/ba139eddadf0) 了解判断依据。
 ## 说明:
-domain.txt中的url格式为:xxx.xxx.com,不需要添加http或者https
-通过判断domain.txt里的url是否正常,此脚本会生成5个txt文件:
+domain.txt中的url格式为:xxx.xxx.com,不需要添加http或者https  
+通过判断domain.txt里的url是否正常,此脚本会生成5个txt文件:  
 - A类表示首页正常且站点符合逻辑的类别
 - B类表示首页异常但站点符合逻辑的类别
 - C类表示首页异常且站点也不符合逻辑的类别

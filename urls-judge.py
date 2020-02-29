@@ -231,12 +231,13 @@ async def get(url, sem):
         
 
 parser = argparse.ArgumentParser(description='test2.py')
-parser.add_argument('-o', '--output', help='The dirname where the files are located', dest='output', required=False)
-parser.add_argument('-i', '--input', help='The path to the file that holds the url or IP', dest='input', required=True)
+parser.add_argument('-o', '--output', help='The dirname where the files are located', dest='output', required=False,
+                    default=os.getcwd())
+parser.add_argument('-i', '--input', help='The absolute path to the collected site file', dest='input', required=True)
 args = parser.parse_args()
 location = args.input
 name = args.output
-if name:
+if name != os.getcwd():
     if not os.path.exists(name):		# 如果路径 path 存在，返回 True；如果路径 path 不存在，返回 False。
         os.mkdir(name)					# 创建目录
         print("创建目录:", name)

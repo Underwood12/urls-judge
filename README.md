@@ -22,7 +22,7 @@ optional arguments:
 -i,　--input　　　　　　　The path to the file that holds the url or IP
 
 ## 举例:
-- 判断c:\domain.txt里的url是否正常，然后在urls-judge.py的目录上生成一个domain目录，在此目录下生成a,b,c,d,e共5个txt文件
+- 判断c:\domain.txt里的url是否正常，然后在urls-judge.py的目录上生成一个domain目录，在此目录下生成a,b,c,d,e共5个txt文件，-o参数默认为py文件的绝对路径
 >python　urls-judge.py　-i=c:\domain.txt　-o=domain
 ## 屏幕截图:
 ![result.png](https://upload-images.jianshu.io/upload_images/21474770-1f2b9362c911a432.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

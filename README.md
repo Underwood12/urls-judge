@@ -15,8 +15,8 @@
 使用pip命令安装即可
 ```
 ## 用法:
->Usage: urls-judge.py [options] -i input  
-Options:  
+>Usage: urls-judge.py [-h] [-o OUTPUT] -i INPUT  
+optional arguments:  
 -h,　--help　　　　　　　show program's version number and exit  
 -o,　--output　　　　　　The dirname where the files are located  
 -i,　--input　　　　　　　The path to the file that holds the url or IP
